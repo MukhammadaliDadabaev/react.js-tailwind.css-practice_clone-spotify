@@ -1,29 +1,29 @@
 import React from 'react';
 import {  FiChevronRight } from 'react-icons/fi';
-import PlayListContextSubmenu from "./PlayListContextSubmenu";
+import PlayListContextMenu from "./PlayListContextMenu";
 
 function PlayListContextMenuItem({ children: label, subMenuItems }) {
 
-  let classes = '';
-  let buttonClasses = 'w-full p-3 text-left hover:text-white hover:bg-[#3e3e3e] cursor-default';
-  let icon = null;
-  let submenu = null;
-
   if (subMenuItems) {
-    classes = 'relative';
-    buttonClasses = `${buttonClasses} flex justify-between items-center`;
-    icon = <FiChevronRight className="h-4 w-4"/>;
-    submenu = <PlayListContextSubmenu menuItems={subMenuItems} />
+    return (
+        <li className="relative">
+
+          <button className='w-full p-3 text-left hover:text-white hover:bg-[#3e3e3e] cursor-default flex justify-between items-center peer'>
+            {label} <FiChevronRight className="h-4 w-4"/>
+          </button>
+
+          <PlayListContextMenu menuItems={subMenuItems} classes='absolute top-0 left-full bg-[#282828] text-[#eaeaea] text-sm p-1 rounded shadow-xl cursor-default invisible peer-hover:visible hover:visible' />
+
+        </li>
+    );
   }
 
   return (
-    <li className={classes}>
+    <li>
 
-      <button className={buttonClasses}>
-        {label} {icon}
+      <button className='w-full p-3 text-left hover:text-white hover:bg-[#3e3e3e] cursor-default'>
+        {label}
       </button>
-
-      {submenu}
 
     </li>
   );
