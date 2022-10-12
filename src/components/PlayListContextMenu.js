@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PlayListContextMenuItem from "./PlayListContextMenuItem";
 
 function PlayListContextMenu({ classes, menuItems, onClose }) {
-  // Event Listing
-  document.addEventListener("mousedown", onClose);
+  // useEffect
+  useEffect(() => {
+    // OPEN-MODUL
+    document.addEventListener("mousedown", onClose);
+
+    return () => {
+      // REMOVE-MODUL
+      document.removeEventListener("mousedown", onClose);
+    };
+  });
 
   return (
     <ul className={classes}>

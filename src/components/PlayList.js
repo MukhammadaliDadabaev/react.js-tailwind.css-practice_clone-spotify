@@ -39,7 +39,7 @@ function PlayList({ classes, coverUrl, title, description }) {
     setIsContextMenuOpen(true);
   };
 
-  const closeContextMenu = (event) => {
+  const closeContextMenu = () => {
     setIsContextMenuOpen(false);
   };
 
