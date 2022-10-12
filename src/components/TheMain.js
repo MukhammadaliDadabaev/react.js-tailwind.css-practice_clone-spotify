@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import PlayList from "./PlayList";
 
 const playList = [
@@ -24,37 +24,37 @@ const playList = [
     classes: "hidden xl:block",
     title: "Playlist title 4",
     description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-    coverUrl: "https://fakeimg.pl/600/365314/fff?text=Cover&font=lobster",
+    coverUrl: "https://fakeimg.pl/600/1e3a8a/fff?text=Cover&font=lobster",
   },
   {
     classes: "hidden 2xl:block",
     title: "Playlist title 5",
     description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-    coverUrl: "https://fakeimg.pl/600/164e63/fff?text=Cover&font=lobster",
+    coverUrl: "https://fakeimg.pl/600/365314/fff?text=Cover&font=lobster",
   },
   {
     classes: "hidden 3xl:block",
     title: "Playlist title 6",
     description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-    coverUrl: "https://fakeimg.pl/600/1e3a8a/fff?text=Cover&font=lobster",
+    coverUrl: "https://fakeimg.pl/600/164e63/fff?text=Cover&font=lobster",
   },
   {
     classes: "hidden 4xl:block",
     title: "Playlist title 7",
     description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-    coverUrl: "https://fakeimg.pl/600/164e63/fff?text=Cover&font=lobster",
+    coverUrl: "https://fakeimg.pl/600/1e3a8a/fff?text=Cover&font=lobster",
   },
   {
     classes: "hidden 5xl:block",
     title: "Playlist title 8",
     description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-    coverUrl: "https://fakeimg.pl/600/164e63/fff?text=Cover&font=lobster",
+    coverUrl: "https://fakeimg.pl/600/365314/fff?text=Cover&font=lobster",
   },
   {
     classes: "hidden 6xl:block",
     title: "Playlist title 9",
     description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-    coverUrl: "https://fakeimg.pl/600/7f1d1d/fff?text=Cover&font=lobster",
+    coverUrl: "https://fakeimg.pl/600/164e63/fff?text=Cover&font=lobster",
   },
 ];
 
@@ -81,14 +81,10 @@ function TheMain() {
           </div>
 
           <div className="grid sm:grid-cols-playlists-mobile md:grid-cols-playlists-tablet lg:grid-cols-playlists-desktop gap-5">
-
             {playList.map((playList) => (
-                <PlayList key={playList.title} {...playList} />
+              <PlayList key={playList.title} {...playList} />
             ))}
-
-
           </div>
-
         </div>
         <div>
           <div className="flex flex-wrap justify-between items-end gap-x-6 mb-[18px]">
@@ -113,11 +109,7 @@ function TheMain() {
               className="relative p-4 rounded-md bg-[#181818] hover:bg-[#272727] duration-200 group"
             >
               <div className="relative">
-                <img
-                  src="/"
-                  className="rounded shadow-lg"
-                  alt="/"
-                />
+                <img src="/" className="rounded shadow-lg" alt="/" />
                 <button className="h-10 w-10 bg-[#1cb955] rounded-full shadow-xl absolute right-2 bottom-2 flex justify-center items-center cursor-auto duration-200 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 hover:scale-105">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -139,8 +131,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
               <ul className="absolute top-9 left-9 bg-[#282828] text-[#eaeaea] text-sm divide-y divide-[#3e3e3e] p-1 rounded shadow-xl cursor-default whitespace-nowrap z-10 hidden group-hover:block">
                 <li>
@@ -222,8 +214,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
             <a
@@ -257,8 +249,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
             <a
@@ -292,8 +284,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
             <a
@@ -327,8 +319,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
             <a
@@ -336,11 +328,7 @@ function TheMain() {
               className="p-4 rounded-md bg-[#181818] hover:bg-[#272727] duration-200 group hidden 3xl:block"
             >
               <div className="relative">
-                <img
-                  src="/7"
-                  className="rounded shadow-lg"
-                  alt="/"
-                />
+                <img src="/7" className="rounded shadow-lg" alt="/" />
                 <button className="h-10 w-10 bg-[#1cb955] rounded-full shadow-xl absolute right-2 bottom-2 flex justify-center items-center cursor-auto duration-200 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 hover:scale-105">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -362,8 +350,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
             <a
@@ -397,8 +385,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
             <a
@@ -432,8 +420,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
             <a
@@ -441,11 +429,7 @@ function TheMain() {
               className="p-4 rounded-md bg-[#181818] hover:bg-[#272727] duration-200 group hidden 6xl:block"
             >
               <div className="relative">
-                <img
-                  src="/8"
-                  className="rounded shadow-lg"
-                  alt="/"
-                />
+                <img src="/8" className="rounded shadow-lg" alt="/" />
                 <button className="h-10 w-10 bg-[#1cb955] rounded-full shadow-xl absolute right-2 bottom-2 flex justify-center items-center cursor-auto duration-200 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 hover:scale-105">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -467,8 +451,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
           </div>
@@ -479,9 +463,7 @@ function TheMain() {
               <h2 className="text-2xl font-semibold hover:underline capitalize">
                 <a href="/">Lorem ipsum</a>
               </h2>
-              <p className="text-sm text-[#b3b3b3]">
-                Lorem ipsum dolor sit.
-              </p>
+              <p className="text-sm text-[#b3b3b3]">Lorem ipsum dolor sit.</p>
             </div>
             <a
               href="/"
@@ -522,8 +504,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
               <ul className="absolute top-9 left-9 bg-[#282828] text-[#eaeaea] text-sm divide-y divide-[#3e3e3e] p-1 rounded shadow-xl cursor-default whitespace-nowrap z-10 hidden group-hover:block">
                 <li>
@@ -605,8 +587,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
             <a
@@ -640,8 +622,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
             <a
@@ -675,8 +657,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
             <a
@@ -710,8 +692,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
             <a
@@ -745,8 +727,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
             <a
@@ -780,8 +762,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
             <a
@@ -815,8 +797,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
             <a
@@ -850,8 +832,8 @@ function TheMain() {
                 Playlist title
               </h3>
               <p className="text-sm text-[#b3b3b3] line-clamp-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Vitae, odit.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae,
+                odit.
               </p>
             </a>
           </div>

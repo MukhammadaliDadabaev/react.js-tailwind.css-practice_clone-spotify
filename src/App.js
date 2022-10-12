@@ -9,24 +9,14 @@ function App() {
   return (
     <>
       <div className="flex flex-grow overflow-auto">
-
-        <TheSidebar/>
-
-       <TheSidebarOverlay/>
+        <TheSidebar />
+        <TheSidebarOverlay />
         <div className="flex-1 overflow-auto">
-
-
-         <TheHeader/>
-
-
-         <TheMain/>
-
-
+          <TheHeader />
+          <TheMain />
         </div>
       </div>
-
-     <TheRegistration/>
-
+      <TheRegistration />
     </>
   );
 }
