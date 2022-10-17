@@ -33,7 +33,7 @@ const menuItems = [
 // Modul-Kontext-cursor
 const clickPosition = { x: null, y: null };
 
-function PlayList({ classes, coverUrl, title, description }) {
+function PlayList({ classes, coverUrl, title, description, toggleScrolling }) {
   // STATE
   const [isContxtMenuOpen, setIsContextMenuOpen] = useState(false);
 
@@ -50,6 +50,8 @@ function PlayList({ classes, coverUrl, title, description }) {
   }
 
   useLayoutEffect(() => {
+    toggleScrolling(!isContxtMenuOpen);
+
     if (isContxtMenuOpen) {
       updateContextMenuPosition();
     }
