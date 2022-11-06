@@ -5,29 +5,52 @@ import PlayListContextMenu from "./PlayListContextMenu";
 
 function PlayListContextMenuItem({ children: label, subMenuItems }) {
   // STATE
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [menuPositionClass, setMenuPositionClass] = useState("left-full");
+  const [menuState, setMenuState] = useState({
+    isOpen: false,
+    positionClasses: "",
+  });
   // Ref
   const menuItemRef = useRef(null);
 
-  // Modal-Link
-  function getMenuPositionClass() {
+  // Modal-Link-X
+  function getMenuPositionXClass() {
     const menuItem = menuItemRef.current;
-    const menuWidth = menuItem.offsetWidth;
+    const menuItemWidth = menuItem.offsetWidth;
     const windowWidth = window.innerWidth;
-    const menuItemEndCoordinate = menuItem.getBoundingClientRect().right;
-    const shouldMoveMenuLeft = menuWidth > windowWidth - menuItemEndCoordinate;
+    const menuItemRidhtCoordX = menuItem.getBoundingClientRect().right;
+    const shouldMoveMenuLeft =
+      menuItemWidth > windowWidth - menuItemRidhtCoordX;
 
     return shouldMoveMenuLeft ? "right-full" : "left-full";
   }
 
+  // Modal-Link-Y
+  function getMenuPositionYClass() {
+    const windowHeight = window.innerHeight;
+    const menuItem = menuItemRef.current;
+    const menuHeight = menuItem.offsetHeight * subMenuItems.length;
+    const menuItemBottomCoordY = menuItem.getBoundingClientRect().bottom;
+    const shouldMoveMenuUp = menuHeight > windowHeight - menuItemBottomCoordY;
+
+    return shouldMoveMenuUp ? "bottom-0" : "top-0";
+  }
+
+  function getMenuPositionClasses() {
+    return `${getMenuPositionYClass()} ${getMenuPositionXClass()}`;
+  }
+
   function openMenu() {
-    setIsMenuOpen(true);
-    setMenuPositionClass(getMenuPositionClass);
+    setMenuState({
+      isOpen: true,
+      positionClasses: getMenuPositionClasses(),
+    });
   }
 
   function closeMenu() {
-    setIsMenuOpen(false);
+    setMenuState({
+      isOpen: false,
+      positionClasses: "",
+    });
   }
 
   if (subMenuItems) {
@@ -42,10 +65,10 @@ function PlayListContextMenuItem({ children: label, subMenuItems }) {
           {label} <FiChevronRight className="h-4 w-4" />
         </button>
 
-        {isMenuOpen && (
+        {menuState.isOpen && (
           <PlayListContextMenu
             menuItems={subMenuItems}
-            classes={`bg-[#282828] text-[#eaeaea] text-sm p-1 rounded shadow-xl cursor-default absolute top-0 ${menuPositionClass}`}
+            classes={`bg-[#282828] text-[#eaeaea] text-sm p-1 rounded shadow-xl cursor-default absolute ${menuState.positionClasses}`}
           />
         )}
       </li>
