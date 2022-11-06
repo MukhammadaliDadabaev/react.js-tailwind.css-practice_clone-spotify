@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 // react-icons
 import { FiChevronRight } from "react-icons/fi";
 import PlayListContextMenu from "./PlayListContextMenu";
@@ -11,6 +11,9 @@ function PlayListContextMenuItem({ children: label, subMenuItems }) {
   });
   // Ref
   const menuItemRef = useRef(null);
+
+  // modal-link-timer
+  let closeMenuTimer = null;
 
   // Modal-Link-X
   function getMenuPositionXClass() {
@@ -40,6 +43,14 @@ function PlayListContextMenuItem({ children: label, subMenuItems }) {
   }
 
   function openMenu() {
+    // modal-link-timer
+    if (closeMenuTimer) {
+      stopCloseMenuTimer();
+
+      return;
+    }
+
+    // madal-open
     setMenuState({
       isOpen: true,
       positionClasses: getMenuPositionClasses(),
@@ -53,12 +64,23 @@ function PlayListContextMenuItem({ children: label, subMenuItems }) {
     });
   }
 
+  // modal-link-timer
+  function startCloseMenuTimer() {
+    closeMenuTimer = setTimeout(closeMenu, 100);
+  }
+
+  function stopCloseMenuTimer() {
+    clearTimeout(closeMenuTimer);
+  }
+
+  useEffect(() => stopCloseMenuTimer);
+
   if (subMenuItems) {
     return (
       <li
         className="relative"
         onMouseEnter={openMenu}
-        onMouseLeave={closeMenu}
+        onMouseLeave={startCloseMenuTimer}
         ref={menuItemRef}
       >
         <button className="w-full p-3 text-left hover:text-white hover:bg-[#3e3e3e] cursor-default flex justify-between items-center">
