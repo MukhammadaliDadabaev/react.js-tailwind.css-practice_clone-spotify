@@ -3,6 +3,17 @@ import PlayListContextMenuItem from "./PlayListContextMenuItem";
 import PlayListContextMenuItemWithSubmenu from "./PlayListContextMenuItemWithSubmenu";
 
 function PlayListContextMenu({ classes, menuItems }, ref) {
+  // Menu modal cursor
+  let closePreviousSubmenu = null;
+
+  function closePreviousSubMenuIfOpen(closeSubMenu = null) {
+    if (closePreviousSubmenu) {
+      closePreviousSubmenu();
+    }
+
+    closePreviousSubmenu = closeSubMenu;
+  }
+
   return (
     <ul className={classes} ref={ref}>
       {menuItems.map(({ label, subMenuItems }) => {
@@ -11,6 +22,7 @@ function PlayListContextMenu({ classes, menuItems }, ref) {
             <PlayListContextMenuItemWithSubmenu
               key={label}
               subMenuItems={subMenuItems}
+              onMouseEnter={closePreviousSubMenuIfOpen}
             >
               {label}
             </PlayListContextMenuItemWithSubmenu>
@@ -18,7 +30,12 @@ function PlayListContextMenu({ classes, menuItems }, ref) {
         }
 
         return (
-          <PlayListContextMenuItem key={label}>{label}</PlayListContextMenuItem>
+          <PlayListContextMenuItem
+            key={label}
+            onMouseEnter={closePreviousSubMenuIfOpen}
+          >
+            {label}
+          </PlayListContextMenuItem>
         );
       })}
     </ul>

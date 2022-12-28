@@ -3,7 +3,11 @@ import React, { useState, useRef, useEffect } from "react";
 import { FiChevronRight } from "react-icons/fi";
 import PlayListContextMenu from "./PlayListContextMenu";
 
-function PlayListContextMenuItemWithSubmenu({ children: label, subMenuItems }) {
+function PlayListContextMenuItemWithSubmenu({
+  children: label,
+  subMenuItems,
+  onMouseEnter: closePreviousSubMenuIfOpen,
+}) {
   // STATE
   const [menuState, setMenuState] = useState({
     isOpen: false,
@@ -43,6 +47,7 @@ function PlayListContextMenuItemWithSubmenu({ children: label, subMenuItems }) {
   }
 
   function openMenu() {
+    closePreviousSubMenuIfOpen(startCloseMenuTimer);
     // modal-link-timer
     if (closeMenuTimer) {
       stopCloseMenuTimer();
@@ -76,12 +81,7 @@ function PlayListContextMenuItemWithSubmenu({ children: label, subMenuItems }) {
   useEffect(() => stopCloseMenuTimer);
 
   return (
-    <li
-      className="relative"
-      onMouseEnter={openMenu}
-      onMouseLeave={startCloseMenuTimer}
-      ref={menuItemRef}
-    >
+    <li className="relative" onMouseEnter={openMenu} ref={menuItemRef}>
       <button className="w-full p-3 text-left hover:text-white hover:bg-[#3e3e3e] cursor-default flex justify-between items-center">
         {label} <FiChevronRight className="h-4 w-4" />
       </button>
