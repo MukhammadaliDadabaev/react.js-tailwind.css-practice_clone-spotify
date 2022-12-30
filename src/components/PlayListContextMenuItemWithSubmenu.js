@@ -17,7 +17,7 @@ function PlayListContextMenuItemWithSubmenu({
   const menuItemRef = useRef(null);
 
   // modal-link-timer
-  let closeMenuTimer = null;
+  const closeMenuTimer = useRef(null);
 
   // Modal-Link-X
   function getMenuPositionXClass() {
@@ -48,12 +48,6 @@ function PlayListContextMenuItemWithSubmenu({
 
   function openMenu() {
     closePreviousSubMenuIfOpen(startCloseMenuTimer);
-    // modal-link-timer
-    if (closeMenuTimer) {
-      stopCloseMenuTimer();
-
-      return;
-    }
 
     // madal-open
     setMenuState({
@@ -71,11 +65,11 @@ function PlayListContextMenuItemWithSubmenu({
 
   // modal-link-timer
   function startCloseMenuTimer() {
-    closeMenuTimer = setTimeout(closeMenu, 100);
+    closeMenuTimer.current = setTimeout(closeMenu, 1000);
   }
 
   function stopCloseMenuTimer() {
-    clearTimeout(closeMenuTimer);
+    clearTimeout(closeMenuTimer.current);
   }
 
   useEffect(() => stopCloseMenuTimer);
