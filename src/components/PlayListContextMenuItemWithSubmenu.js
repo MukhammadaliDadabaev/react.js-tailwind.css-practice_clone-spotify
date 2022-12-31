@@ -65,7 +65,7 @@ function PlayListContextMenuItemWithSubmenu({
 
   // modal-link-timer
   function startCloseMenuTimer() {
-    closeMenuTimer.current = setTimeout(closeMenu, 1000);
+    closeMenuTimer.current = setTimeout(closeMenu, 100);
   }
 
   function stopCloseMenuTimer() {
