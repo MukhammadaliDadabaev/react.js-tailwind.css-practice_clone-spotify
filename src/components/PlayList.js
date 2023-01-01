@@ -6,31 +6,31 @@ import PlayListTitle from "./PlayListTitle";
 import PlayListDescription from "./PlayListDescription";
 import PlayListContextMenu from "./PlayListContextMenu";
 
-const menuItems = [
-  {
-    label: "Add to Your Library",
-  },
-  {
-    label: "Share",
-
-    subMenuItems: [
-      {
-        label: "Copy link to playlist",
-        alternateLabel: "Copy Spotify URI",
-        classes: "min-w-[150px]",
-      },
-      {
-        label: "Embed playlist",
-      },
-    ],
-  },
-  {
-    label: "About recommendations",
-  },
-  {
-    label: "Open in Desktop app",
-  },
-];
+function generateContextMenuItems(isAlternate = false) {
+  return [
+    {
+      label: "Add to Your Library",
+    },
+    {
+      label: "Share",
+      subMenuItems: [
+        {
+          label: isAlternate ? "Copy Spotify URI" : "Copy link to playlist",
+          classes: "min-w-[150px]",
+        },
+        {
+          label: "Embed playlist",
+        },
+      ],
+    },
+    {
+      label: "About recommendations",
+    },
+    {
+      label: "Open in Desktop app",
+    },
+  ];
+}
 
 // Modul-Kontext-cursor
 const clickPosition = { x: null, y: null };
@@ -38,6 +38,9 @@ const clickPosition = { x: null, y: null };
 function PlayList({ classes, coverUrl, title, description, toggleScrolling }) {
   // STATE
   const [isContxtMenuOpen, setIsContextMenuOpen] = useState(false);
+  const [contextMenuItem, setContextMenuItem] = useState(
+    generateContextMenuItems()
+  );
 
   const contextMenuRef = useRef(null);
 
@@ -105,6 +108,29 @@ function PlayList({ classes, coverUrl, title, description, toggleScrolling }) {
     };
   });
 
+  // Modal-menu-link
+  useEffect(() => {
+    function handleAltKeydown({ key }) {
+      if (key === "Alt" && isContxtMenuOpen) {
+        setContextMenuItem(generateContextMenuItems(true));
+      }
+    }
+
+    function handleAltKeyup({ key }) {
+      if (key === "Alt" && isContxtMenuOpen) {
+        setContextMenuItem(generateContextMenuItems());
+      }
+    }
+
+    document.addEventListener("keydown", handleAltKeydown);
+    document.addEventListener("keyup", handleAltKeyup);
+
+    return () => {
+      document.removeEventListener("keydown", handleAltKeydown);
+      document.removeEventListener("keyup", handleAltKeyup);
+    };
+  });
+
   const openContextMenu = (event) => {
     event.preventDefault();
 
@@ -138,7 +164,7 @@ function PlayList({ classes, coverUrl, title, description, toggleScrolling }) {
       {isContxtMenuOpen && (
         <PlayListContextMenu
           ref={contextMenuRef}
-          menuItems={menuItems}
+          menuItems={contextMenuItem}
           classes="fixed bg-[#282828] text-[#eaeaea] text-sm divide-y divide-[#3e3e3e] p-1 rounded shadow-xl cursor-default whitespace-nowrap z-10"
         />
       )}

@@ -1,22 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import PlayListContextMenuItem from "./PlayListContextMenuItem";
 import PlayListContextMenuItemWithSubmenu from "./PlayListContextMenuItemWithSubmenu";
 
 function PlayListContextMenu({ classes, menuItems }, ref) {
   // Menu modal cursor
-  let closePreviousSubmenu = null;
+  let closePreviousSubmenu = useRef(null);
 
   function closePreviousSubMenuIfOpen(closeSubMenu = null) {
-    if (closePreviousSubmenu) {
-      closePreviousSubmenu();
+    if (closePreviousSubmenu.current) {
+      closePreviousSubmenu.current();
     }
 
-    closePreviousSubmenu = closeSubMenu;
+    closePreviousSubmenu.current = closeSubMenu;
   }
 
   return (
     <ul className={classes} ref={ref}>
-      {menuItems.map(({ label, alternateLabel, classes, subMenuItems }) => {
+      {menuItems.map(({ label, classes, subMenuItems }) => {
         if (subMenuItems) {
           return (
             <PlayListContextMenuItemWithSubmenu
@@ -33,7 +33,6 @@ function PlayListContextMenu({ classes, menuItems }, ref) {
           <PlayListContextMenuItem
             key={label}
             classes={classes}
-            alternateLabel={alternateLabel}
             onMouseEnter={closePreviousSubMenuIfOpen}
           >
             {label}
