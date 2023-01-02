@@ -19,6 +19,9 @@ function PlayListContextMenuItemWithSubmenu({
   // modal-link-timer
   const closeMenuTimer = useRef(null);
 
+  // Modal-hoher card
+  const bgClass = menuState.isOpen ? "bg-[#3e3e3e]" : "hover:bg-[#3e3e3e]";
+
   // Modal-Link-X
   function getMenuPositionXClass() {
     const menuItem = menuItemRef.current;
@@ -76,14 +79,16 @@ function PlayListContextMenuItemWithSubmenu({
 
   return (
     <li className="relative" onMouseEnter={openMenu} ref={menuItemRef}>
-      <button className="w-full p-3 text-left hover:text-white hover:bg-[#3e3e3e] cursor-default flex justify-between items-center">
+      <button
+        className={`w-full p-3 text-left hover:text-white cursor-default flex justify-between items-center ${bgClass}`}
+      >
         {label} <FiChevronRight className="h-4 w-4" />
       </button>
 
       {menuState.isOpen && (
         <PlayListContextMenu
           menuItems={subMenuItems}
-          classes={`bg-[#282828] text-[#eaeaea] text-sm p-1 rounded shadow-xl cursor-default absolute ${menuState.positionClasses}`}
+          classes={`absolute ${menuState.positionClasses}`}
         />
       )}
     </li>
