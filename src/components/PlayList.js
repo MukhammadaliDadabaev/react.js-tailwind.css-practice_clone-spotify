@@ -1,12 +1,14 @@
-import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
+
 // components
 import PlayListCover from "./PlayListCover";
 import PlayListButtonPlay from "./PlayListButtonPlay";
 import PlayListTitle from "./PlayListTitle";
 import PlayListDescription from "./PlayListDescription";
 import PlayListContextMenu from "./PlayListContextMenu";
+import useContextMenu from "../hooks/useContextMenu";
 
-function generateContextMenuItems(isAlternate = false) {
+function generateMenuItems(isAlternate = false) {
   return [
     {
       label: "Add to Your Library",
@@ -32,88 +34,28 @@ function generateContextMenuItems(isAlternate = false) {
   ];
 }
 
-// Modul-Kontext-cursor
-const clickPosition = { x: null, y: null };
-
 function PlayList({ classes, coverUrl, title, description, toggleScrolling }) {
   // STATE
-  const [isContxtMenuOpen, setIsContextMenuOpen] = useState(false);
-  const [contextMenuItem, setContextMenuItem] = useState(
-    generateContextMenuItems()
-  );
+  const [menuItems, setMenuItem] = useState(generateMenuItems());
 
-  const contextMenuRef = useRef(null);
+  const {
+    openContextMenu: openMenu,
+    isContxtMenuOpen: isMenuOpen,
+    contextMenuRef: menuRef,
+  } = useContextMenu();
 
-  // BG-CLASSES
-  const bgClasses = isContxtMenuOpen
-    ? "bg-[#272727]"
-    : "bg-[#181818] hover:bg-[#272727]";
-
-  // start CONTEXT-MENU-MODAL
-  function updateContextMenuVerticalPosition() {
-    const menuHeight = contextMenuRef.current.offsetHeight;
-    const shouldMoveUp = menuHeight > window.innerHeight - clickPosition.y;
-
-    contextMenuRef.current.style.top = shouldMoveUp
-      ? `${clickPosition.y - menuHeight}px`
-      : `${clickPosition.y}px`;
-  }
-
-  function updateContextMenuHorizontalPosition() {
-    const menuWidth = contextMenuRef.current.offsetWidth;
-    const shouldMoveLeft = menuWidth > window.innerWidth - clickPosition.x;
-
-    contextMenuRef.current.style.left = shouldMoveLeft
-      ? `${clickPosition.x - menuWidth}px`
-      : `${clickPosition.x}px`;
-  }
-
-  function updateContextMenuPosition() {
-    updateContextMenuVerticalPosition();
-    updateContextMenuHorizontalPosition();
-  }
-  // end CONTEXT-MENU-MODAL
-
-  useLayoutEffect(() => {
-    toggleScrolling(!isContxtMenuOpen);
-
-    if (isContxtMenuOpen) updateContextMenuPosition();
-  });
-
-  // OPEN-MODUL useEffect
-  useEffect(() => {
-    if (!isContxtMenuOpen) return;
-
-    function handleClickAway(event) {
-      if (!contextMenuRef.current.contains(event.target)) closeContextMenu();
-    }
-
-    function handleEsc({ key }) {
-      if (key === "Escape") closeContextMenu();
-    }
-
-    document.addEventListener("mousedown", handleClickAway);
-    document.addEventListener("keydown", handleEsc);
-
-    return () => {
-      // REMOVE-MODUL
-      document.removeEventListener("mousedown", handleClickAway);
-      document.removeEventListener("keydown", handleEsc);
-    };
-  });
+  useLayoutEffect(() => toggleScrolling(!isMenuOpen));
 
   // Modal-menu-link
   useEffect(() => {
+    if (!isMenuOpen) return;
+
     function handleAltKeydown({ key }) {
-      if (key === "Alt" && isContxtMenuOpen) {
-        setContextMenuItem(generateContextMenuItems(true));
-      }
+      if (key === "Alt") setMenuItem(generateMenuItems(true));
     }
 
     function handleAltKeyup({ key }) {
-      if (key === "Alt" && isContxtMenuOpen) {
-        setContextMenuItem(generateContextMenuItems());
-      }
+      if (key === "Alt") setMenuItem(generateMenuItems());
     }
 
     document.addEventListener("keydown", handleAltKeydown);
@@ -124,26 +66,17 @@ function PlayList({ classes, coverUrl, title, description, toggleScrolling }) {
       document.removeEventListener("keyup", handleAltKeyup);
     };
   });
-
-  const openContextMenu = (event) => {
-    event.preventDefault();
-
-    clickPosition.x = event.clientX;
-    clickPosition.y = event.clientY;
-
-    setIsContextMenuOpen(true);
-  };
-
-  const closeContextMenu = () => {
-    setIsContextMenuOpen(false);
-  };
+  // BG-CLASSES
+  const bgClasses = isMenuOpen
+    ? "bg-[#272727]"
+    : "bg-[#181818] hover:bg-[#272727]";
 
   return (
     <a
       href="/"
       className={`relative p-4 rounded-md duration-200 group ${classes} ${bgClasses}`}
       onClick={(event) => event.preventDefault()}
-      onContextMenu={openContextMenu}
+      onContextMenu={openMenu}
     >
       <div className="relative">
         <PlayListCover url={coverUrl} />
@@ -155,10 +88,10 @@ function PlayList({ classes, coverUrl, title, description, toggleScrolling }) {
 
       <PlayListDescription description={description} />
 
-      {isContxtMenuOpen && (
+      {isMenuOpen && (
         <PlayListContextMenu
-          ref={contextMenuRef}
-          menuItems={contextMenuItem}
+          ref={menuRef}
+          menuItems={menuItems}
           classes="fixed divide-y divide-[#3e3e3e]"
         />
       )}
