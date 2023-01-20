@@ -1,7 +1,5 @@
-import { useState, useRef, useLayoutEffect, useEffect } from "react";
-
-// Modul-Kontext-cursor
-const clickPosition = { x: null, y: null };
+import { useState, useRef, useEffect } from "react";
+import usePosition from "./useContextMenuPosition";
 
 function useContextMenu() {
   // STATE
@@ -10,33 +8,8 @@ function useContextMenu() {
   const contextMenuRef = useRef(null);
 
   // start CONTEXT-MENU-MODAL
-  function updateContextMenuVerticalPosition() {
-    const menuHeight = contextMenuRef.current.offsetHeight;
-    const shouldMoveUp = menuHeight > window.innerHeight - clickPosition.y;
-
-    contextMenuRef.current.style.top = shouldMoveUp
-      ? `${clickPosition.y - menuHeight}px`
-      : `${clickPosition.y}px`;
-  }
-
-  function updateContextMenuHorizontalPosition() {
-    const menuWidth = contextMenuRef.current.offsetWidth;
-    const shouldMoveLeft = menuWidth > window.innerWidth - clickPosition.x;
-
-    contextMenuRef.current.style.left = shouldMoveLeft
-      ? `${clickPosition.x - menuWidth}px`
-      : `${clickPosition.x}px`;
-  }
-
-  function updateContextMenuPosition() {
-    updateContextMenuVerticalPosition();
-    updateContextMenuHorizontalPosition();
-  }
+  const updateClickCordinates = usePosition(contextMenuRef, isContxtMenuOpen);
   // end CONTEXT-MENU-MODAL
-
-  useLayoutEffect(() => {
-    if (isContxtMenuOpen) updateContextMenuPosition();
-  });
 
   // OPEN-MODUL useEffect
   useEffect(() => {
@@ -63,8 +36,7 @@ function useContextMenu() {
   const openContextMenu = (event) => {
     event.preventDefault();
 
-    clickPosition.x = event.clientX;
-    clickPosition.y = event.clientY;
+    updateClickCordinates(event.clientX, event.clientY);
 
     setIsContextMenuOpen(true);
   };
